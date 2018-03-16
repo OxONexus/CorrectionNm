@@ -17,7 +17,6 @@
 void			direct(t_program *prog, char *ptr, char *name)
 {
 	unsigned int	magic;
-
 	prog->start_prog = (void*)ptr;
 	magic = *(unsigned int*)ptr;
 	prog->endian = *(unsigned int*)ptr;
@@ -53,7 +52,7 @@ int				read_file2(char *file, int isprint)
 	ft_bzero(&prog, sizeof(prog));
 	fd = open(file, O_RDONLY);
 	fstat(fd, &buf);
-	if (buf.st_size < 8200 || fd < 0)
+	if (fd < 0)
 		return (0);
 	ptr = mmap(0, buf.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
 	if (ptr == MAP_FAILED)

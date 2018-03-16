@@ -29,6 +29,7 @@ t_list			*get_sym_list(t_program *prog, char *ptr)
 	unsigned int		i;
 
 	i = 0;
+	check_ptr(prog, (unsigned long)ptr);
 	prog->symtabcmds = (struct symtab_command*)ptr;
 	prog->symtab_array = (void*)prog->start_prog + endian_read(prog,
 			prog->symtabcmds->symoff);
@@ -41,6 +42,7 @@ t_list			*get_sym_list(t_program *prog, char *ptr)
 	{
 		if((tmp = (t_symbol*)malloc(sizeof(t_symbol))) == NULL)
 			exit (0);
+		check_ptr(prog, (unsigned long)&prog->symtab_array[i]);
 		tmp->name = prog->start_stringtable +
 			endian_read(prog, prog->symtab_array[i].n_un.n_strx);
 		tmp->symb = get_symb(prog, i);
@@ -59,6 +61,7 @@ t_list			*get_sym_list_32(t_program *prog, char *ptr)
 	unsigned int	i;
 
 	i = 0;
+	check_ptr(prog, (unsigned long)ptr);
 	prog->symtabcmds = (struct symtab_command*)ptr;
 	prog->symtab_array2 = (void*)prog->start_prog + prog->symtabcmds->symoff;
 	prog->nb_symtabcmds = prog->symtabcmds->nsyms;
@@ -69,6 +72,7 @@ t_list			*get_sym_list_32(t_program *prog, char *ptr)
 	while (i < prog->symtabcmds->nsyms)
 	{
 		tmp = (t_symbol*)malloc(sizeof(t_symbol));
+		check_ptr(prog, (unsigned long)&prog->symtab_array2[i]);
 		tmp->name = prog->start_stringtable +
 			prog->symtab_array2[i].n_un.n_strx;
 		tmp->symb = get_symb32(prog, i);

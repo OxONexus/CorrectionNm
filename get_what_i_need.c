@@ -12,10 +12,10 @@
 
 #include "nm.h"
 
-int check_ptr(t_program *prog, unsigned int ptr)
+int check_ptr(t_program *prog, unsigned long ptr)
 {
-	if ((unsigned int)ptr < (unsigned int)prog->start_prog ||
-			(unsigned int)ptr > (unsigned int)prog->start_prog + prog->load_size)
+	if (ptr < (unsigned long)prog->start_prog ||
+			ptr > (unsigned long)prog->start_prog + prog->load_size)
 		exit(0);
 	return 1;
 }
@@ -57,8 +57,11 @@ void				sorte_list_offset(t_program *prog, t_list *list)
 	{
 		s1 = list->content;
 		s2 = list->next->content;
-		//check_ptr(prog, (unsigned int)s1);
-		//check_ptr(prog, (unsigned int)s2);
+
+		if (ft_strncmp(prog->start_prog, "!<arch>", 7) != 0) {
+			check_ptr(prog, (unsigned long)s1->name);
+			check_ptr(prog, (unsigned long)s2->name);
+		}
 		if (s1->addr > s2->addr)
 		{
 			swap_symb(s1, s2);
@@ -86,8 +89,10 @@ void				sorte_list(t_program *prog, t_list *list)
 	{
 		s1 = list->content;
 		s2 = list->next->content;
-		//check_ptr(prog, (unsigned int)s1);
-	//	check_ptr(prog, (unsigned int)s2);
+		if (ft_strncmp(prog->start_prog, "!<arch>", 7) != 0) {
+			check_ptr(prog, (unsigned long)s1->name);
+			check_ptr(prog, (unsigned long)s2->name);
+		}
 		if (ft_strcmp(s1->name, s2->name) > 0)
 		{
 			swap_symb(s1, s2);

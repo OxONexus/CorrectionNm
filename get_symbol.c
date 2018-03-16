@@ -23,6 +23,8 @@ void		get_32sec(t_program *prog, int i, char *tmp)
 			prog->symtab_array2[i].n_sect >= prog->nbsection)
 		*tmp = n_ext ? 'S' : 's';
 	a = prog->section[prog->symtab_array2[i].n_sect - 1];
+	check_ptr(prog, (unsigned long)a->segname);
+	check_ptr(prog, (unsigned long)a->segname);
 	if (a && ft_strcmp(a->segname, "__DATA") == 0)
 		if (ft_strcmp(a->sectname, "__data") == 0)
 			*tmp = n_ext ? 'D' : 'd';
@@ -72,6 +74,8 @@ void		get_sec(t_program *prog, int i, char *tmp)
 			prog->symtab_array[i].n_sect >= prog->nbsection_64)
 		*tmp = n_ext ? 'S' : 's';
 	a = prog->section_64[prog->symtab_array[i].n_sect - 1];
+	check_ptr(prog, (unsigned long)a->segname);
+	check_ptr(prog, (unsigned long)a->segname);
 	if (a && ft_strcmp(a->segname, "__DATA") == 0)
 		if (ft_strcmp(a->sectname, "__data") == 0)
 			*tmp = n_ext ? 'D' : 'd';

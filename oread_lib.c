@@ -90,6 +90,7 @@ void		oread_lib_symtab(t_list *list, t_program *prog)
 		tmp = list->content;
 		if (strcmp(name, tmp->name) != 0)
 		{
+			nw = *prog;
 			odirect(&nw, (char*)tmp->addr + 0x50, tmp->name);
 			name = tmp->name;
 		}

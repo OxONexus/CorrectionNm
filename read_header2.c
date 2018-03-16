@@ -48,12 +48,12 @@ void	*find_load_command(t_program *prog, char *ptr, int nb_loadcmds, unsigned in
 
 	i = 0;
 	loadcmd = (struct load_command *)ptr;
-	check_ptr(prog, (unsigned int)ptr);
+	check_ptr(prog, (unsigned long)ptr);
 	if (nb_loadcmds < 0 || nb_loadcmds > 9999)
 		exit(0);
 	while (i < nb_loadcmds)
 	{
-		check_ptr(prog, (unsigned int)loadcmd);
+		check_ptr(prog, (unsigned long)loadcmd);
 		if (loadcmd->cmd == cmd)
 			return (loadcmd);
 		loadcmd = (void*)loadcmd + loadcmd->cmdsize;

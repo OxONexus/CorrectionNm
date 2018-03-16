@@ -86,15 +86,15 @@ void							oread_fat_head(t_program *prog, char *ptr);
 void							*find_load_command(t_program *prog, char *ptr, int nb_loadcmds,
 		unsigned int cmd);
 void							*jerecherche(char *ptr, int nsect, char *name);
-void							*find_load_commandseg(char *ptr,
-		int nb_loadcmds, unsigned int cmd, char *name);
+void							*find_load_commandseg(t_program *prog, char *ptr[2],
+		int nb_loadcmds, unsigned int cmd);
 void							*find_load_commandseg32(char *ptr,
 		int nb_loadcmds,
 		unsigned int cmd, char *name);
 void							lst_add(t_list **begin, void *content,
 		int content_size);
-void							print_code(char *ptr, uint64_t offset[2],
-		unsigned int size, int type);
+void							print_code(t_program *prog, char *ptr, uint64_t offset[3],
+		 int type);
 void							print_name(char *name);
 void							long_print2(unsigned long hex, int size);
 void							read_32symtab(t_program *prog, char *ptr,
@@ -125,6 +125,6 @@ int								check_tab(int **tab, int *size, int nb);
 unsigned long long				llendian_swap(unsigned long long x);
 void							create_seg_list64(t_program *prog,
 		struct segment_command_64 *ptr);
-int check_ptr(t_program *prog, unsigned int ptr);
+int check_ptr(t_program *prog, unsigned long ptr);
 
 #endif

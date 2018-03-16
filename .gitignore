@@ -1,4 +1,7 @@
 *.o
+test/
 *.a
+.curr*
+report_crash/
 ft_nm
 ft_otool
